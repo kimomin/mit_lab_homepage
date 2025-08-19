@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modus - Single Page Portfolio Theme | GraphBerry.com</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free singlepage web template created by GraphBerry">
+    <meta name="keywords" content="HTML5, Bootstrap 3, CSS3, javascript, PHP, Responsive, Mobile">
+    <meta name="author" content="GraphBerry.com"/>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i" rel="stylesheet">
+    <!-- Styles -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/slick.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+</head>
+<body class="{{ body_class | default('') }}">
+    <header id="header">
+		
+		<!-- Section title -->
+		<h1 class="sr-only">Modus | Home page</h1>
+		
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+		  <!-- Section title -->
+		  <h1 class="sr-only">Main navigation</h1>
+
+		  <div class="container">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		    	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+		        	<span class="sr-only">Toggle navigation</span>
+		        	<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+		      	</button>
+		      	<a class="navbar-brand" href="{{ url_for('home') }}">
+		        	<img alt="Logo" src="{{ url_for('static', filename='img/logo.png') }}">
+		      	</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="main-navbar">
+		      <ul class="nav navbar-nav navbar-right">
+
+				<!-- 드롭다운 메뉴 시작 -->
+				<li class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						About Us 
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{{ url_for('vision') }}">Vision</a></li>
+						<li><a href="{{ url_for('researchareas') }}">Research Areas</a></li>
+                    </ul>
+				</li>
+
+				<li class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						Members 
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{{ url_for('professor') }}">Professor</a></li>
+						<li><a href="{{ url_for('current') }}">Current Members</a></li>
+						<li><a href="{{ url_for('alumni') }}">Alumni</a></li>
+					</ul>
+				</li>
+
+				<li class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						Achievement 
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{{ url_for('paper') }}">Journal</a></li>
+						<li><a href="{{ url_for('conference') }}">Conference</a></li>
+					</ul>
+				</li>
+
+                <li class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						Boards
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{{ url_for('notice') }}">Notice</a></li>
+						<li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+					</ul>
+				</li>
+
+                <li>
+                    <a href="{{ url_for('contact') }}">Contact</a></li>
+
+				{% if current_user.is_authenticated and current_user.is_admin %}
+				<li class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						My Page 
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/admin/edit_home">Edit Home</a></li>
+						<li><a href="/logout">Sign Out</a></li>
+						<li><a href="{{ url_for('register') }}">Register</a></li>
+					</ul>
+				</li>
+				{% elif current_user.is_authenticated %}
+				<li class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						My Page
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/logout">Sign Out</a></li>
+					</ul>
+				</li>
+				{% else %}
+				<li>
+					<a href="{{ url_for('login') }}">Sign In</a></li>
+				{% endif %}
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container -->
+		</nav>
+	</header>
+
+    <main style="padding-top: 90px; min-height: 100vh;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- JS 라이브러리 로딩  -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/smooth-scroll.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/slick.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/modernizr.mq.js') }}"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>	<script src="{{ url_for('static', filename='js/smooth-scroll.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+	<!-- AOS JS -->
+	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+	<script>
+	  AOS.init();
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+	<script>
+		const swiper = new Swiper('.swiper-container', {
+			slidesPerView: 'auto',
+			spaceBetween: 20,
+			loop: true,
+			loopedSlides: 10,
+			allowTouchMove: false,
+			speed: 4000,
+			autoplay: {
+				delay: 0,
+				disableOnInteraction: false,
+			},
+		});
+	</script>
+
+</body>
+</html>

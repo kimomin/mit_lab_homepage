@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Edit Gallery Post</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-group">
+            <label for="title">Post Title</label>
+            <input type="text" class="form-control" name="title" value="{{ post.title }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" name="date" value="{{ post.date.strftime('%Y-%m-%d') }}" required>
+        </div>
+
+        <hr>
+        <!-- 기존 이미지 목록 -->
+        <h4 class="mb-3">Current Images</h4>
+        <div class="row post-row">
+            {% for image in post.images %}
+            <div class="image-wrapper col-12 d-flex justify-content-center mb-4" id="image-card-{{ image.id }}">
+                <img src="{{ url_for('static', filename='upload/' + image.filename) }}" class="img-fluid mb-2">
+                <div class="card-body text-center">
+                    <!-- hidden 필드로 이미지 ID 전달 -->
+                    <input type="hidden" name="image_ids" value="{{ image.id }}">
+                    <!-- 설명 -->
+                    <input type="text" name="descriptions_{{ image.id }}" class="form-control mb-2" value="{{ image.description }}" placeholder="Image description">
+                    <!-- 썸네일 선택 -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="thumbnail_index" value="{{ image.id }}"
+                        {% if post.thumbnail_id == image.id %}checked{% endif %}>
+                        <label class="form-check-label">Set as Thumbnail</label>
+                    </div>
+                    <!-- 삭제 버튼 -->
+                     <button type="button" class="btn btn-sm btn-outline-danger mt-2"
+                        onclick="deleteImage({{ post.id }}, {{ image.id }})">
+                        Delete Image
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr>
+        <!-- 새 이미지 업로드 -->
+        <h4 class="mb-3">Add New Images</h4>
+        <div id="image-upload-section">
+            <div class="image-block mb-3">
+                <input type="file" name="images[]" class="form-control mb-2">
+                <input type="text" name="descriptions[]" class="form-control mb-2" placeholder="Image description">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="thumbnail_index" value="new_0">
+                    <label class="form-check-label">Set as Thumbnail</label>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary mb-3" id="add-image">+ Add More Images</button>
+
+        <button type="submit" class="btn btn-success">Update Post</button>
+    </form>
+</div>
+
+<script>
+let imageIndex = 1;
+document.getElementById('add-image').addEventListener('click', function() {
+    const container = document.getElementById('image-upload-section');
+
+    const block = document.createElement('div');
+    block.classList.add('image-block', 'mb-3');
+    block.innerHTML = `
+        <input type="file" name="images[]" class="form-control mb-2">
+        <input type="text" name="descriptions[]" class="form-control mb-2" placeholder="Image description">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="thumbnail_index" value="new_${imageIndex}">
+            <label class="form-check-label">Set as Thumbnail</label>
+        </div>
+    `;
+    container.appendChild(block);
+    imageIndex++;
+});
+
+function deleteImage(postId, imageId) {
+    if (!confirm('Delete this image?')) return;
+
+    fetch(`/gallery/${postId}/delete_image/${imageId}`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token() }}'  // 필요시 CSRF 보호 사용
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            // 삭제 성공 시 해당 이미지 카드 제거
+            const imageCard = document.getElementById(`image-card-${imageId}`);
+            if (imageCard) imageCard.remove();
+        } else {
+            alert("Failed to delete image.");
+        }
+    })
+    .catch(error => {
+        console.error('Error deleting image:', error);
+        alert("Error occurred while deleting image.");
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-5 conference-container">
+        <div class="d-flex justify-content-between align-items-center my-5">
+            <h2 class="section-title">Conference</h2>
+            {% if current_user.is_authenticated and current_user.is_admin %}
+            <a href="{{ url_for('conference_create_post') }}" class="btn btn-primary mb-3 conference-post-btn">+ New Conference</a>
+            {% endif %}
+
+            <table class="conference-table">
+                <colgroup>
+                    <col width="50px">
+                    <col>
+                </colgroup>
+                <tbody>
+                    {% for conference in conferences %}
+                    <tr class="bg1">
+                        <td class="num">{{ loop.index }}</td>
+                        <td class="name_title">
+                            <span class="text_title">{{ conference.title }}</span>
+                            <span class="text_author">{{ conference.author }}</span>
+                            <span class="text_journal_vol">
+                                <i>{{ conference.journal }}, {% if conference.month %}{{ conference.month }}, {% endif %}{{ conference.year }}</i>
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,127 @@
+<!--
+ * A Design by GraphBerry
+ * Author: GraphBerry
+ * Author URL: http://graphberry.com
+ * License: http://graphberry.com/pages/license
+-->
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+	
+	<section id="home">
+
+		<!-- Section title -->
+		<h1 class="sr-only">Home section</h1>
+
+		<div class="home-content">
+			
+			<div class="container-fluid">
+				
+				<div class="row">
+
+					<div class="col-md-12 home-col">
+						<h1 class="h1" data-aos="fade up" data-aos-duration="1500" data-aos-offset="0">Medical<br>Informatics<br>&<br>Technology</h2>
+						
+						<!-- <span class="h5"> Welcome to the MIT Laboratory<br>in the College of Medicine<br>at Keimyung University</span> -->
+
+					</div>
+					
+				</div>
+
+			</div>
+
+		</div>
+
+		<a id="down-icon" class="down-icon smoothScroll" href="#introduction">
+			<img class="down-arrow" src="{{ url_for('static', filename='img/svg/down_icon.png') }}" alt="Down arrow" width="50" />
+		</a>
+
+	</section>
+
+	<section id="introduction">
+
+		<!-- Section title -->
+		<h1 class="sr-only">Introduction section</h1>
+
+		<div class="container">
+
+			<div class="row">
+				
+				<div class="col-md-8 col-md-offset-2">
+
+					<div class="introduction-content">
+						
+						<h2 class="section-title" data-aos="fade-up" data-aos-duration="800">Welcome to MIT Lab</h2>
+
+						<p data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">The Medical Informatics & Technology Laboratory is a research lab under the Department of Medical Informatics at Keimyung University School of Medicine.<br>We bridge clinical medicine and data science through innovative research.<br>
+							Our work focuses on developing AI, big data, and digital health technologies to improve patient care and shape the future of healthcare.
+							</p>
+
+					</div>
+
+				</div>
+
+			</div>
+			
+		</div>	
+
+	</section>
+
+	<section id="latest_papers">
+
+	    <h1 class="sr-only">Latest Papers</h1>
+
+		<div class="container" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+			<h2 class="section-title mb-4">Latest Papers</h2>
+
+			<div class="publication-carousel-wrapper">
+				<div class="publication-carousel">
+					{% for paper in latest_papers %}
+					<a href="{{ paper.link }}" target="_blank" class="publication-card">
+						<h5>{{ paper.title }}</h5>
+						<hr>
+						<p>{{ paper.author }}</p>
+						<p class="text-muted">{{ paper.journal }}, {{ paper.month }}, {{ paper.year }}</p>
+					</a>
+					{% endfor %}
+					{% for paper in latest_papers %}
+					<a href="{{ paper.link }}" target="_blank" class="publication-card clone">
+						<h5>{{ paper.title }}</h5>
+						<hr>
+						<p>{{ paper.author }}</p>
+						<p class="text-muted">{{ paper.journal }}, {{ paper.month }}, {{ paper.year }}</p>
+					</a>
+					{% endfor %}
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+	<footer id="footer">
+
+		<!-- Section title -->
+		<h1 class="sr-only">Footer section</h1>
+		
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-sm-6">
+					<h5 class="footer title">Medical Informatics & Technology Lab</h5>
+				</div>
+				
+				<div class="col-sm-6">
+					<h5 class="footer title">Designed and Created by S.Kim, 2025</h5>
+				</div>
+
+			</div>
+			
+		</div>
+
+	</footer>
+
+{% endblock %}

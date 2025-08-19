@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-5 notice-container">
+        <div class="d-flex justify-content-between align-items-center my-5">
+            <h2 class="section-title">Notice</h2>
+            {% if current_user.is_authenticated and current_user.is_admin %}
+            <a href="{{ url_for('notice_create_post') }}" class="btn btn-primary mb-3 notice-post-btn">+ New Post</a>
+            {% endif %}
+
+            <table class="notice-table">
+                <thead>
+                    <tr>
+                        <th style="width: 70%;">Title</th>
+                        <th style="width: 15%;">Date</th>
+                        <th style="width: 15%;">Views</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for notice in notices %}
+                    <tr onclick="location.href='{{ url_for('notice_view_post', notice_id=notice.id) }}'">
+                        <td>{{ notice.title }}</td>
+                        <td>{{ notice.created_at.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ notice.view_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

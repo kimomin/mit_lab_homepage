@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-5 gallery-container">
+        <div class="d-flex justify-content-between align-items-center my-5">
+            <h2 class="section-title">Gallery</h2>
+            {% if current_user.is_authenticated and current_user.is_admin %}
+            <a href="{{ url_for('gallery_create_post') }}" class="btn btn-success gallery-post-btn">+ New Post</a>
+            {% endif %}
+        </div>
+  
+        <div class="row gallery-row">
+            {% for post in posts %}
+            <div class="col-12 col-sm-6 col-md-4 card-wrapper">
+                <div class="card h-100">
+                    <a href="{{ url_for('gallery_view_post', post_id=post.id) }}" class="image-wrapper d-block position-relative">
+                        {% if post.thumbnail %}
+                        <img src="{{ url_for('static', filename='upload/' + post.thumbnail.filename) }}"
+                             class="card-img-top" alt="Thumbnail">
+                        {% else %}
+                        <img src="{{ url_for('static', filename='img/default_thumbnail.png') }}"
+                             class="card-img-top" alt="No Thumbnail">
+                        {% endif %}
+                    </a>
+                    <div class="overlay">
+                        <a href="{{ url_for('gallery_view_post', post_id=post.id) }}" class="overlay-link"></a>
+                        <div class="overlay-text">
+                            <h5 class="card-title text-center mb-0">{{ post.title }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <p class="card-text text-muted mb-0">{{ post.date.strftime('%Y-%m-%d') }}</p>
+                    {% if current_user.is_authenticated and current_user.is_admin %}
+                    <!-- ✅ Delete 버튼: z-index로 위에 오게 -->
+                    <div class="custom-delete-btn-wrapper" style="position: relative; z-index: 5;">
+                        <form method="POST" action="{{ url_for('delete_post', post_id=post.id) }}"
+                            onsubmit="return confirm('Delete this post?')">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-sm btn-danger custom-delete-btn">Delete</button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}    
+        </div>
+    </div>
+{% endblock %}

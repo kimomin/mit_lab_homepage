@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid mt-5 professor-container">
+        <div class="d-flex justify-content-between align-items-center my-5">
+            <h2 class="section-title">Professor</h2>
+        </div>
+        <div class="professor-box">
+            <div class="professor-photo">
+                <img src="{{ url_for('static', filename='img/members/professor.jpeg') }}" alt="Professor Photo">
+            </div>
+            <div class="professor-info">
+                <h3 class="professor-name">Seungbo Lee, Ph.D.</h3>
+                <p class="professor-title">Director, MIT Lab<br>Assistant Professor, Department of Medical Informatics<br>Keimyung University School of Medicine</p>
+            
+                <table class="professor-details">
+                    <tr>
+                        <th>Email</th>
+                        <td>koreateam23@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>+82-53-258-7496</td>
+                    </tr>
+                    <tr>
+                        <th>Office</th>
+                        <td>Room 401, Medical Informatics Building</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Education -->
+        <div class="professor-section-sub">
+            <h4>Education</h4>
+                <ul>
+                    <li>Ph.D. in Engineering, Korea University Graduate School, Integrated M.S./Ph.D. Program</li>
+                    <li>B.S. in Information and Communications Engineering, Korea University</li>
+                </ul>
+        </div>
+
+        <!-- Career -->
+        <div class="professor-section-sub">
+            <h4>Career</h4>
+                <ul>
+                    <li>Assistant Professor, Department of Medical Informatics, Keimyung University School of Medicine (2022–present)</li>
+                    <li>Research Professor, Information Planning Department, Seoul National University Hospital (2020–2022)</li>
+                    <li>Ph.D. in Engineering (Integrated M.S./Ph.D. Program), Korea University Graduate School (2020)</li>
+                    <li>B.S. in Information and Communications Engineering, Korea University College of Information and Communications (2015)</li>
+                </ul>
+        </div>
+
+        <!-- Awards -->
+        <div class="professor-section-sub">
+            <h4>Awards</h4>
+                <ul>
+                    <li>Best Paper Award, KOSMI Conference, 2022</li>
+                    <li>Young Researcher Award, KMS, 2021</li>
+                </ul>
+        </div>
+    </div>
+
+{% endblock %}
