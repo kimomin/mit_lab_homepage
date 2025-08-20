@@ -195,7 +195,13 @@ def current():
             "role": "Undergraduate Student",
             "email": "minho@kmu.ac.kr",
             "photo": "upload/members/장준.png"
-        },               
+        },  
+        {
+            "name": "Deokyeon Kim",
+            "role": "Undergraduate Student",
+            "email": "minho@kmu.ac.kr",
+            "photo": "upload/members/김덕현.png"
+        }            
 
         # ⬇️ 여기에 새 멤버 추가
 
