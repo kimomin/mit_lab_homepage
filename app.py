@@ -197,7 +197,7 @@ def current():
             "photo": "upload/members/장준.png"
         },  
         {
-            "name": "Deokyeon Kim",
+            "name": "Deokhyeon Kim",
             "role": "Undergraduate Student",
             "email": "minho@kmu.ac.kr",
             "photo": "upload/members/김덕현.png"
