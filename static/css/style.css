@@ -1994,7 +1994,7 @@ table.notice-table th {
 	width: 30px;
 	height: 2px;
 	background-color: #d7edda;
-	margin: 50px auto 50px;
+	margin: 50px auto 60px;
 }
 
 #location-subsection p {
@@ -2040,7 +2040,7 @@ table.notice-table th {
 }
 
 #contactus-subsection .phone-title {
-	margin-top: 28px;
+	margin-top: 60px;
 	font-size: 20px;
 	text-align: center;
 	text-transform: none;
@@ -2079,7 +2079,7 @@ table.notice-table th {
 @media (max-width: 767px) {
 	.contact-subsection {
 		margin: 20px 0px;
-		padding: 20px 20px;
+		padding: 30px 20px;
 		height: 50vh;
 	}
 
