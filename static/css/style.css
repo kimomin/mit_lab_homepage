@@ -76,15 +76,17 @@ h2.section-title {
 	text-align: center;
 }
 
-/***
-h2.section-title:after {
-	display: block;
-	content: '';
-	width: 100%;
-	height: 19px;
-	background: transparent;
-	margin-top: 45px;
-} ***/
+@media (max-width: 767px) {
+	h2 {
+		font-size: 40px;
+	}
+
+	h2.section-title {
+		color: #d7edda;
+		margin: 50px 0px 30px;
+		text-align: center;
+	}
+}
 
 h5 {
 	font-size: 15px;
@@ -126,6 +128,26 @@ label {
 button, .btn {
 	font-size: 15px;
 }
+
+.container-fluid {
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+@media (max-width: 767px) {
+	.container-fluid {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
+
+@media (hover: none) and (pointer: coarse) {
+	.container-fluid {
+		padding-left: 30px;
+		padding-right: 30px;
+	}	
+}
+
 
 /**********************
 NAVBAR (base.html)
@@ -902,6 +924,150 @@ Latest Papers SECTION
   }
 }
 
+@media (max-width: 450px) {
+
+	@keyframes scroll-left {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-90%);
+	}
+	}
+
+	.publication-carousel {
+		display: flex;
+		width: max-content;
+		animation: scroll-left 60s linear infinite;
+	}
+
+	.publication-card {
+		flex: 0 0 auto;
+		width: 280px;
+		height: 280px;
+		border: 1px solid #b1eeb9;
+		border-radius: 8px;	
+		margin-right: 20px;
+		background-color: #060606;
+		color: #d7edda;
+		text-decoration: none;
+		padding: 16px;
+		transition: transform 0.3s ease;
+	}
+
+	.publication-card:hover,
+	.publication-card:focus {
+		flex: 0 0 auto;
+		width: 280px;
+		height: 280px;
+		border: 1px solid #b1eeb9;
+		border-radius: 8px;	
+		margin-right: 20px;
+		background-color: #060606;
+		color: #d7edda;
+		text-decoration: none;
+		padding: 16px;
+		transform: none;
+	}
+
+	.publication-card h5 {
+		text-transform: none; 
+		height: 60%;
+		margin-bottom: 1rem;
+		line-height: 1.3;
+		letter-spacing: 0.04em;
+		font-size: 15px;
+		align-content: center;
+	}
+
+	.publication-card hr {
+		margin: 0 0 20px;
+
+	}
+
+	.publication-card p {
+		line-height: 1.1;
+		margin-bottom: 1rem;
+		font-size: 12px;
+	}
+
+	.publication-card p.text-muted {
+		font-size: 11px;
+	}
+}
+
+
+@media (hover: none) and (pointer: coarse) and (max-width: 450px) {
+	@keyframes scroll-left {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-90%);
+	}
+	}
+
+	.publication-carousel {
+		display: flex;
+		width: max-content;
+		animation: scroll-left 60s linear infinite;
+	}
+
+	.publication-card {
+		flex: 0 0 auto;
+		width: 280px;
+		height: 280px;
+		border: 1px solid #b1eeb9;
+		border-radius: 8px;	
+		margin-right: 20px;
+		background-color: #060606;
+		color: #d7edda;
+		text-decoration: none;
+		padding: 16px;
+		transition: transform 0.3s ease;
+	}
+
+	.publication-card:hover,
+	.publication-card:focus {
+		flex: 0 0 auto;
+		width: 280px;
+		height: 280px;
+		border: 1px solid #b1eeb9;
+		border-radius: 8px;	
+		margin-right: 20px;
+		background-color: #060606;
+		color: #d7edda;
+		text-decoration: none;
+		padding: 16px;
+		transform: none;
+	}
+
+	.publication-card h5 {
+		text-transform: none; 
+		height: 60%;
+		margin-bottom: 1rem;
+		line-height: 1.3;
+		letter-spacing: 0.04em;
+		font-size: 15px;
+		align-content: center;
+	}
+
+	.publication-card hr {
+		margin: 0 0 10px;
+
+	}
+
+	.publication-card p {
+		line-height: 1.1;
+		margin-bottom: 0.5rem;
+		font-size: 12px;
+	}
+
+	.publication-card p.text-muted {
+		font-size: 11px;
+	}
+}
+
 /**********************
 FOOTER SECTION
 ***********************/
@@ -912,13 +1078,51 @@ FOOTER SECTION
 	padding: 55px 0;
 }
 
-#footer .copyright {
-	font-family: 'Montserrat', sans-serif;
+#footer .footer-title {
+	text-align: center;
 }
 
-#footer .social-list {
-	float: right;
+@media (max-width: 767px) and (min-width: 451px) {
+	#footer {
+		background: #060606;
+		color: #d7edda;
+		padding: 55px 0;
+		text-align: center;
+	}
+
+	#footer .footer-title {
+		font-size: 15px;
+		text-align: center;
+	}
 }
+
+@media (max-width: 450px) {
+	#footer {
+	background: #060606;
+	color: #d7edda;
+	padding: 55px 0;
+	}
+
+	#footer .footer-title {
+		font-size: 12px;
+		text-align: center;
+	}
+
+}
+
+@media (hover: none) and (pointer: coarse) and (max-width: 450px) {
+	#footer {
+	background: #060606;
+	color: #d7edda;
+	padding: 55px 0;
+	}
+
+	#footer .footer-title {
+		font-size: 12px;
+		text-align: center;
+	}
+}
+
 
 /**********************
 HELPER CLASSES
@@ -965,30 +1169,6 @@ RESPONSIVE
 
 }
 
-@media only screen and (max-width: 991px) {
-
-	/**********************
-	SERVICES SECTION
-	***********************/
-    .service:not(first-of-type) {
-        margin-top: 30px;
-    }
-
-    /**********************
-	CONTACT SECTION
-	***********************/
-
-	#about-subsection, #form-subsection {
-		padding: 80px;
-		min-height: auto;
-	}
-
-	#form-subsection {
-		margin-top: 55px;
-	}
-
-}
-
 @media only screen and (max-width: 767px) {
 	
 	/**********************
@@ -1011,63 +1191,14 @@ RESPONSIVE
 	.home-content h2 {
 		font-size: 42px;
 	}
-
-	/**********************
-	SERVICES SECTION
-	***********************/
-    .service {
-        padding: 30px;
-    }
-
-	/**********************
-	CLIENTS SECTION
-	***********************/
-	.single-client-container:not(first-of-type) {
-		margin-top: 60px;
-	}
-
-	/**********************
-	CONTACT SECTION
-	***********************/
-
-	#about-subsection, #form-subsection {
-		padding: 60px 30px;
-		min-height: auto;
-	}
-
-
-	/**********************
-	FOOTER SECTION
-	***********************/
-	#footer {
-		text-align: center;
-	}
-
-	.footer-title {
-		font-size: 10px;
-		font-weight: 300;
-		text-align: left;
-	}
-
-	#footer .social-list {
-		float: none;
-		margin-top: 45px;
-	}
-
 }
 
 
 
 /********************** professor.html ***********************/
-.professor-container {
-	padding-left: 60px;
-	padding-right: 60px;
-}
-
 .professor-page {
   background-color: #060606 !important;
 }
-
 
 .professor-box {
   display: flex;
@@ -1163,39 +1294,116 @@ RESPONSIVE
   margin-bottom: 8px;
 }
 
-@media (hover: none) and (pointer: coarse), (max-width: 767px) {
-  .professor-box {
-    flex-direction: column;
-    align-items: center;
-  }
+@media (hover: none) and (pointer: coarse) and (max-width: 895px) and (min-width: 768px), (max-width: 895px) and (min-width: 768px)  {
+	.professor-box {
+		padding: 20px;
+	}
 
-  .professor-photo {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
+	.professor-photo {
+		flex: 1 1 180px;
+		max-width: 180px;
+		margin-right: 20px;
+		align-content: center;
+	}
 
-  .professor-info {
-    text-align: center;
-  }
+	.professor-photo img {
+		width: 100%;
+		height: auto;
+		border-radius: 8px;
+		border: 0px solid;
+	}
 
-  .professor-details th {
-    text-align: left;
-  }
+	.professor-name {
+		font-size: 25px;
+		margin: 5px 0px 15px;
+	}
 
-  .professor-section-sub ul {
-    margin-left: 15px;
-  }
+	.professor-title {
+		font-size: 15px;
+		margin-bottom: 15px;
+	}
+
+	.professor-details {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 12px;
+	}
+
+	.professor-details th {
+		width: 70px;
+		font-weight: 600;
+		color: #d7edda;
+		text-align: left;
+	}
 }
 
+@media (hover: none) and (pointer: coarse) and (max-width: 767px), (max-width: 767px) {
+	.professor-box, .professor-box * {
+		box-sizing: border-box;
+	}
 
+	.professor-box {
+		display: flex;
+		justify-content: center;
+		padding: 30px;
+		max-width: 1000px;
+		color: #d7edda;
+		background: #060606;
+		border: 1px solid #b1eeb9;
+		border-radius: 8px;
+	}
+
+	.professor-photo {
+		flex: 1 1 80%;
+		max-width: 280px;
+		margin-right: 0;
+  		margin-bottom: 20px;
+		text-align: center;
+	}
+
+	.professor-photo img {
+		width: 100%;
+		height: auto;
+		border-radius: 8px;
+		border: 0px solid;
+	}
+
+	.professor-info {
+		flex: 1 1 80%;
+		text-align: center;
+	}
+
+	.professor-section-sub ul {
+		margin-left: 15px;
+	}
+}
+
+@media (max-width: 575px) {
+	.professor-name {
+		font-size: 25px;
+		margin: 5px 0px 20px;
+	}
+
+	.professor-title {
+		font-size: 15px;
+		margin-bottom: 30px;
+	}
+
+	.professor-details {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 13px;
+	}
+
+	.professor-details th {
+		width: 80px;
+		font-weight: 600;
+		color: #d7edda;
+		text-align: left;
+	}
+}
 
 /********************** current.html ***********************/
-.member-container {
-    padding-left: 150px;
-    padding-right: 150px;
-    background-color: #060606;
-}
-
 .member-row .card-wrapper {
     margin-bottom: 3rem;
     transition: transform 0.3s ease;
@@ -1215,7 +1423,6 @@ RESPONSIVE
     overflow: hidden;
 }
 
-/* 이미지 wrapper: 고정 높이 & 가운데 정렬 */
 .member-row .image-wrapper {
 	flex: 0 0 40%;
 	overflow: hidden;
@@ -1226,10 +1433,9 @@ RESPONSIVE
 	padding: 10px;
 }
 
-/* 이미지 비율 유지 + 중앙 정렬 */
-.member-row  .card-img-top {
+.member-row .card-img-top {
 	aspect-ratio: 3.5 / 4.5;
-	max-width: 50%;
+	max-width: 70%;
 	min-height: 160px;
 	max-height: 165px;
 	object-fit: contain;
@@ -1246,6 +1452,8 @@ RESPONSIVE
     margin-bottom: 5px;
     font-weight: bold;
     color: #d7edda;
+	text-transform: none;
+	letter-spacing: 0.5px;
 }
 
 .member-row  .card-text {
@@ -1254,32 +1462,35 @@ RESPONSIVE
     color: #d7edda;
 }
 
-@media (hover: none) and (pointer: coarse), (max-width: 767px) {
-	.member-container {
-		padding-left: 60px;
-		padding-right: 60px;
-		background-color: #060606;
+@media (hover: none) and (pointer: coarse) and (max-width: 767px) {
+	.member-row .card-wrapper {
+		margin-bottom: 3rem;
+		transition: none;
 	}
 
-	.member-row .card-wrapper {
-    margin-bottom: 3rem;
-    transition: transform 0.3s ease;
+	.member-row .card-wrapper:hover {
+		transform: none;
+	}
+	
+	.member-row .image-wrapper {
+		padding-bottom: 0;
 	}
 
     .member-row  .card-img-top {
-        height: 250px;
+		max-width: 80%;
+        height: auto;
     }
 
     .member-row  .card-body {
-        padding: 15px;
+        padding: 10px;
     }
 
     .member-row .card-title {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .member-row  .card-text {
-        font-size: 13px;
+        font-size: 12px;
     }
 }
 
@@ -1289,11 +1500,6 @@ RESPONSIVE
 
 
 /********************** paper.html ***********************/
-.paper-container {
-	padding-left: 60px;
-	padding-right: 60px;
-}
-
 .custom-select {
 	background-color: #060606; 
 	color: #d7edda;           
@@ -1351,23 +1557,88 @@ RESPONSIVE
 .paper-table .text_title {
 	display: block;
 	font-weight: bolder;
-	font-size: 1.3em;
+	font-size: 20px;
 	color: #d7edda;
+	line-height: 1.3;
 	margin-bottom: 8px;
 }
 
 .paper-table .text_author {
 	display: block;
 	font-weight: normal;
-	font-size: 0.9em;
+	font-size: 15px;
 	color: #d7edda;
 }
 
 .paper-table .text_journal_vol {
 	display: block;
 	font-weight: lighter;
-	font-size: 0.9em;
+	font-size: 15px;
 	color: #808080;
+	line-height: 1.3;
+}
+
+@media (hover: none) and (pointer: coarse) and (max-width: 767px), (max-width: 767px) {
+	.form-inline .form-control,
+	.form-control .custom-select {
+		display: inline-block !important;
+		width: auto !important;
+		vertical-align: middle;
+	} 
+
+	.form-inline label {
+		display: inline-block;
+		margin-right: 8px;
+	}
+
+	.custom-select {
+		background-color: #060606; 
+		color: #d7edda;           
+		border: 1px solid #d7edda;   
+		border-radius: 4px;
+		padding: 5px 10px;
+	}
+
+	.custom-select:hover,
+	.custom-select:focus {
+		background-color: #060606; 
+		color: #d7edda;           
+		border: 1px solid #d7edda;   
+		border-radius: 4px;
+		padding: 5px 10px;
+	}
+
+	.paper-table th{
+		font-size: 15px;
+	}
+
+	.paper-table .num {
+		font-size: 12px;
+		padding: 5px;
+	}
+
+	.paper-table .text_title {
+		display: block;
+		font-weight: bolder;
+		font-size: 15px;
+		color: #d7edda;
+		line-height: 1.3;
+		margin-bottom: 8px;
+	}
+
+	.paper-table .text_author {
+		display: block;
+		font-weight: normal;
+		font-size: 12px;
+		color: #d7edda;
+	}
+
+	.paper-table .text_journal_vol {
+		display: block;
+		font-weight: lighter;
+		font-size: 12px;
+		color: #808080;
+	}
 }
 
 /********************** conference.html ***********************/
@@ -1421,11 +1692,6 @@ RESPONSIVE
 }
 
 /********************** notice.html ***********************/
-.notice-container {
-	padding-left: 60px;
-	padding-right: 60px;
-}
-
 .notice-page {
 	background-color: #060606;
 }
@@ -1434,6 +1700,10 @@ RESPONSIVE
     border-collapse: collapse; /* 테이블의 기본 스타일 제거 */
     width: 100%;
 }
+
+.notice-table .title-col {width: 70%;}
+.notice-table .date-col {width: 15%;}
+.notice-table .views-col {width: 15%;}
 
 table.notice-table thead tr {
     border-bottom: 2px solid #b1eeb9;  /* 상단 선 색 변경 */
@@ -1453,6 +1723,19 @@ table.notice-table th {
     padding: 10px;
 }
 
+.notice-table th:nth-child(2),
+.notice-table th:nth-child(3),
+.notice-table td:nth-child(2),
+.notice-table td:nth-child(3) {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.notice-table td:nth-child(2),
+.notice-table td:nth-child(3) {
+	font-size: 12px;
+	padding: 5px;
+}
 
 .notice-table tbody tr:hover {
     background-color: inherit;  /* 배경색 변화 제거 */
@@ -1460,6 +1743,25 @@ table.notice-table th {
     cursor: pointer;           
 }
 
+@media (hover: none) and (pointer: coarse) and (max-width: 767px), (max-width: 767px) {
+	.notice-table .title-col {width: 65%;}
+	.notice-table .date-col {width: 20%;}
+	.notice-table .views-col {width: 15%;}
+
+	table.notice-table th {
+		font-size: 18px;
+		padding: 10px;
+	}
+	.notice-table td:nth-child(1) {
+		font-size: 13px;
+		padding: 10px;
+	}
+	.notice-table td:nth-child(2),
+	.notice-table td:nth-child(3) {
+		font-size: 10px;
+		padding: 5px;
+	}
+}
 
 
 /********************** gallery.html ***********************/
@@ -1592,6 +1894,7 @@ table.notice-table th {
 	font-size: 16px;
 	margin-bottom: 0;
 }
+
 .post-row {
 	display: flex;
 	flex-direction: column;
@@ -1613,34 +1916,76 @@ table.notice-table th {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	line-height: 1.6; 
-	word-break: keep-all;     /* 단어 단위로 줄바꿈 */
-	overflow-wrap: break-word; /* 너무 긴 단어는 줄바꿈 */
-	white-space: normal;       /* 줄바꿈 허용 */
+	word-break: keep-all;  
+	overflow-wrap: break-word; 
+	white-space: normal;     
 }
 
+.attachment-link {
+	font-size: 12px;
+	color: #d7edda;
+	text-decoration: underline;
+}
+
+.attachment-link:hover {
+	color: #b1eeb9;
+}
+
+.custom-notice-btn {
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: #d7edda;
+	color: #060606;
+	font-size: 15px;
+	text-decoration: none;
+	border-radius: 8px;
+	margin-top: 20px;
+}
+
+.custom-notice-btn:hover {
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: #b1eeb9;
+	color: #060606;
+	font-size: 15px;
+	text-decoration: none;
+	border-radius: 8px;
+	margin-top: 20px;
+}
 
 
 /********************** contact.html ***********************/
-
-#contact {
-	background-color: #060606;
-	color: #d7edda;
-	padding: 90px 20px 70px;
+/**
+.contact-row {
+	margin-left: 60px;
+	margin-right: 60px;
 }
+
+@media (max-width: 767px) {
+	.contact-row {
+		margin-left: 30px;
+		margin-right: 30px;
+	}
+}
+
+@media (hover: none) and (pointer: coarse) {
+	.contact-row {
+		margin-left: 30px;
+		margin-right: 30px;
+	}	
+}
+**/
 
 .contact-subsection {
 	border: 1px solid #b1eeb9;
 	text-align: center;
-	margin: 0 auto;
-	width: 480px;
-	min-height: 500px;
-	max-height: 500px;
+	height: 60vh;
+	width: auto;
+	max-width: 100%;
 	box-sizing: border-box;
 	border-radius: 8px;
-}
-
-#location-subsection {
-	padding: 95px 92px 149px;
+	padding: 40px 30px;
+	margin: 20px;
 }
 
 #location-subsection h3:after {
@@ -1656,8 +2001,15 @@ table.notice-table th {
 	margin-top: 54px;
 }
 
-#contactus-subsection {
-	padding: 95px 70px 76px;
+.contact-subsection .embed-responsive {
+	position: relative;
+	flex: 1;
+	height: 30vh;
+}
+
+.contact-subsection iframe {
+	position: absolute;
+    height: 30vh !important;
 }
 
 #contactus-subsection h3:after {
@@ -1669,17 +2021,40 @@ table.notice-table th {
 	margin: 50px auto 50px;
 }
 
-#contactus-subsection .email-label {
+#contactus-subsection .email-title {
 	margin-top: 28px;
+	font-size: 20px;
+	text-align: center;
+	text-transform: none;
 }
 
-#contactus-subsection input {
-	padding: 0 5px;
-	height: 33px;
+#contactus-subsection .email-text {
+	margin-top: 10px;
+	font-size: 16px;
+	text-align: center;
+	text-transform: none;
+
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
-#contactus-subsection .message-label {
-	margin-top: 60px;
+#contactus-subsection .phone-title {
+	margin-top: 28px;
+	font-size: 20px;
+	text-align: center;
+	text-transform: none;
+}
+
+#contactus-subsection .phone-text {
+	margin-top: 10px;
+	font-size: 16px;
+	text-align: center;
+	text-transform: none;
+
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .embed-responsive {
@@ -1700,6 +2075,25 @@ table.notice-table th {
 	width: 100%;
 	border: 0;
 }
+
+@media (max-width: 767px) {
+	.contact-subsection {
+		margin: 20px 0px;
+		padding: 20px 20px;
+		height: 50vh;
+	}
+
+	#location-subsection h3:after {
+		margin: 30px auto 30px ;
+	}
+}
+
+@media (hover: none) and (pointer: coarse) {
+	.contact-subsection {
+		margin: 20px 0px;
+	}	
+}
+
 
 /********************** login.html ***********************/
 

@@ -126,80 +126,80 @@ def current():
         },
         {
             "name": "Gyumin Kim",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "gyumin@gmail.com",
             "photo": "upload/members/김규민.png"
         },
         {
             "name": "Jinho Lee",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "B.S. Student",
+            "email": "jinho@gmail.com",
             "photo": "upload/members/이진호.png"
         },
         {
             "name": "Yunseok Ju",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "yunseok@gmail.com",
             "photo": "upload/members/주윤석.png"
         },
         {
             "name": "Seonghun Lee",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "seonghun@gmail.com",
             "photo": "upload/members/이성훈.png"
         },
         {
             "name": "Minseo Song",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "minseo@gmail.com",
             "photo": "upload/members/송민서.png"
         },
         {
             "name": "Jiseon Park",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "jinseon@gmail.com",
             "photo": "upload/members/박지선.png"
         }, 
         {
             "name": "Seoyeong Mun",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "seyeong@gmail.com",
             "photo": "upload/members/문서영.png"
         }, 
         {
             "name": "Chaehyeon Kim",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "chaehyeon@gmail.com",
             "photo": "upload/members/김채현.png"
         }, 
         {
             "name": "Seongmin Kim",
-            "role": "Undergraduate Student",
+            "role": "M.S. Student",
             "email": "5888831@stu.kmu.ac.kr",
             "photo": "upload/members/김성민.png"
         },
         {
             "name": "Junhyeok Oh",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "junhyeok@gmail.com",
             "photo": "upload/members/오준혁.png"
         }, 
         {
             "name": "Nadan Jo",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "nadan@gmail.com",
             "photo": "upload/members/조나단.png"
         }, 
         {
             "name": "Jun Jang",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "jun@gmail.com",
             "photo": "upload/members/장준.png"
         },  
         {
             "name": "Deokhyeon Kim",
-            "role": "Undergraduate Student",
-            "email": "minho@kmu.ac.kr",
+            "role": "M.S. Student",
+            "email": "deokhyeon@gmail.com",
             "photo": "upload/members/김덕현.png"
         }            
 

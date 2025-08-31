@@ -11,7 +11,7 @@
 
         <div class="row member-row">
             {% for member in members %}
-            <div class="col-12 col-sm-6 col-md-4 card-wrapper">
+            <div class="col-xs-6 col-sm-4 card-wrapper">
                 <div class="card h-100">
                     <div class="image-wrapper d-block position-relative member-photo">
                         <img src="{{ url_for('static', filename=member.photo) }}" class="card-img-top" alt="Member Photo">

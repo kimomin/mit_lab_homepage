@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="post-header text-center my-4">
-   <h2>{{ post.title }}</h2>
+   <h2 class="post-title">{{ post.title }}</h2>
    <p class="text-muted post-date">{{ post.date.strftime('%Y-%m-%d') }}</p>
 
    {% if current_user.is_authenticated and current_user.is_admin %}

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}공지 보기{% endblock %}
+{% block title %}Notice_View_Post{% endblock %}
 {% block content %}
 <div class="container-fluid mt-5 notice-container">
     <div class="post-header text-center my-4">
-        <h2>{{ notice.title }}</h2>
+        <h2 class="post-title">{{ notice.title }}</h2>
         <p class="text-muted">
             Date: {{ notice.created_at.strftime('%Y-%m-%d') }} |
             Views: {{ notice.view_count }}
@@ -12,11 +12,11 @@
         <div>
             {{ notice.content.replace('\n', '<br>') | safe }}
         </div>
+        <hr>
         {% if notice.attachments %}
-        <h5>첨부파일</h5>
-        <ul>
+        <ul class="attachment">
             {% for file in notice.attachments %}
-                <li><a href="{{ url_for('static', filename='upload/' ~ file.filename) }}" target="_blank">{{ file.filename.split('/')[-1] }}</a></li>
+                <li><a href="{{ url_for('static', filename='upload/' ~ file.filename) }}" target="_blank" class="attachment-link">{{ file.filename.split('/')[-1] }}</a></li>
             {% endfor %}
         </ul>
         {% endif %}
@@ -27,7 +27,7 @@
             <button type="submit" class="btn btn-danger mt-3">Delete</button>
         </form>
         {% endif %}
-        <a href="{{ url_for('notice') }}" class="btn btn-secondary mt-3">Back to List</a>
+        <a href="{{ url_for('notice') }}" class="custom-notice-btn">Back to List</a>
     </div>
 </div>
 {% endblock %}

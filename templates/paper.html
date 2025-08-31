@@ -44,7 +44,7 @@
                             <tbody>
                         {% endif %}
                         <tr class="bg1 clickable-row" data-href="{{ paper.link }}">
-                            <td class="num">
+                            <td class="num" style="width: 10%">
                                 {{ total + 1 - ((page - 1) * per_page + loop.index) }}
                                 {% if current_user.is_authenticated and current_user.is_admin %}
                                 <form method="POST" action="{{ url_for('paper_delete_post', paper_id=paper.id) }}"
