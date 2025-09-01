@@ -3,24 +3,26 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="post-header text-center my-4">
-   <h2 class="post-title">{{ post.title }}</h2>
-   <p class="text-muted post-date">{{ post.date.strftime('%Y-%m-%d') }}</p>
+   <div class="container-fluid mt-5 gallery-view-container">
+      <div class="post-header text-center my-4">
+         <h2 class="post-title">{{ post.title }}</h2>
+         <p class="text-muted post-date">{{ post.date.strftime('%Y-%m-%d') }}</p>
 
-   {% if current_user.is_authenticated and current_user.is_admin %}
-   <a href="{{ url_for('gallery_edit_post', post_id=post.id) }}" class="btn btn-outline-success btn-sm mt-2">
-      Edit Post
-   </a>
-   {% endif %}
-</div>
-<div class="row post-row">
-   {% for image in images %}
-   <div class="image-wrapper col-12 d-flex justify-content-center mb-4">
-      <img src="{{ url_for('static', filename='upload/' + image.filename) }}" class="img-fluid mb-2">
-      <div class="card-body text-center">
-         <p class="description-text">{{ image.description }}</p>
+         {% if current_user.is_authenticated and current_user.is_admin %}
+         <a href="{{ url_for('gallery_edit_post', post_id=post.id) }}" class="btn btn-outline-success btn-sm mt-2">
+            Edit Post
+         </a>
+         {% endif %}
+      </div>
+      <div class="row post-row">
+         {% for image in images %}
+         <div class="image-wrapper col-12 d-flex justify-content-center mb-4">
+            <img src="{{ url_for('static', filename='upload/' + image.filename) }}" class="img-fluid mb-2">
+            <div class="card-body text-center">
+               <p class="description-text">{{ image.description }}</p>
+            </div>
+         </div>
+         {% endfor %}
       </div>
    </div>
-   {% endfor %}
-</div>
 {% endblock %}

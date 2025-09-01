@@ -1881,6 +1881,11 @@ table.notice-table th {
 }
 
 /********************** view_post.html ***********************/
+.gallery-view-container {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
 .post-header{
 	margin-top: 80px;
 	margin-bottom: 30px;
@@ -1953,6 +1958,13 @@ table.notice-table th {
 	margin-top: 20px;
 }
 
+@media (hover: none) and (pointer: coarse) and (max-width: 767px) {
+	.post-row .image-wrapper img {
+		width: 400px;
+		height: auto;       
+		display: block;  
+	}
+}
 
 /********************** contact.html ***********************/
 /**
@@ -2079,13 +2091,18 @@ table.notice-table th {
 @media (max-width: 767px) {
 	.contact-subsection {
 		margin: 20px 0px;
-		padding: 30px 20px;
+		padding: 30px 15px;
 		height: 50vh;
 	}
 
-	#location-subsection h3:after {
-		margin: 30px auto 30px ;
+	.contact-subsection h3:after {
+		margin: 7vh auto 5vh !important;
 	}
+
+	.contact-subsection iframe {
+	position: absolute;
+    height: 20vh !important;
+}
 }
 
 @media (hover: none) and (pointer: coarse) {
