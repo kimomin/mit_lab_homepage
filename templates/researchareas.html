@@ -1,7 +1,42 @@
 {% extends "base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Research_Areas{% endblock %}
 
 {% block content %}
+    <div class="container-fluid mt-5 alumni-container">
+        <div class="d-flex justify-content-between align-items-center my-5">
+            <h2 class="section-title">Rresearch Areas</h2>
+        </div>
+
+        <div class="row areas-row">
+
+            <div class="col-md-12 vision-col">
+
+                <div class="areas-row-signals" data-aos="fade right" data-aos-delay="100" data-aos-duration="1500" data-aos-offset="0">
+                    <h1 class="h1-signals">Biomedical Signals</h2>
+                    <h5 class="h5-signals">
+                        We focus on advanced signal processing and machine learning techniques for ECG, EEG, and PPG to extract meaningful physiological insights and support clinical decision-making.
+                    </h5>
+                </div>
+
+                <div class="areas-row-imaging" data-aos="fade left" data-aos-delay="200" data-aos-duration="1500" data-aos-offset="0">
+                    <h1 class="h1-imaging">Medical Imaging</h2>
+                    <h5 class="h5-imaging">
+                        We develop innovative computer vision and deep learning algorithms for medical imaging, including X-ray, CT, and MRI, to improve diagnostic accuracy and workflow efficiency.
+                    </h5>
+                </div>
+                
+                <div class="areas-row-emr" data-aos="fade right" data-aos-delay="100" data-aos-duration="1500" data-aos-offset="0">
+                    <h1 class="h1-emr">Electronic Health Records</h2>
+                    <h5 class="h5-emr">
+                        We leverage large-scale electronic health records to develop predictive models and data-driven solutions that enhance patient care, risk assessment, and personalized medicine.
+                    </h5>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
 
 {% endblock %}

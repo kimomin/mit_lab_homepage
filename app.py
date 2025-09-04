@@ -18,8 +18,8 @@ import secrets
 app = Flask(__name__)
 
 csrf = CSRFProtect(app)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') 
-app.config['WTF_CSRF_ENABLED'] = True
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev_secret_key')  ##
+app.config['WTF_CSRF_ENABLED'] = False ##
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -119,91 +119,95 @@ def professor():
 def current():
     members = [
         {
-            "name": "Donggeun Lee",
+            "name": "Dong-Geun Lee",
             "role": "B.S. Student",
-            "email": "donggeun@gmail.com",
+            "email": "qqwwas1234@gmail.com",
             "photo": "upload/members/이동근.png"
         },
         {
-            "name": "Gyumin Kim",
-            "role": "M.S. Student",
-            "email": "gyumin@gmail.com",
-            "photo": "upload/members/김규민.png"
-        },
-        {
-            "name": "Jinho Lee",
+            "name": "Jin-Ho Lee",
             "role": "B.S. Student",
-            "email": "jinho@gmail.com",
+            "email": "jinho6606@naver.com",
             "photo": "upload/members/이진호.png"
         },
         {
-            "name": "Yunseok Ju",
+            "name": "Min-Seo Song",
             "role": "M.S. Student",
-            "email": "yunseok@gmail.com",
-            "photo": "upload/members/주윤석.png"
-        },
-        {
-            "name": "Seonghun Lee",
-            "role": "M.S. Student",
-            "email": "seonghun@gmail.com",
-            "photo": "upload/members/이성훈.png"
-        },
-        {
-            "name": "Minseo Song",
-            "role": "M.S. Student",
-            "email": "minseo@gmail.com",
+            "email": "minseo7250@gmail.com",
             "photo": "upload/members/송민서.png"
+        },
+        {
+            "name": "Gyu-Min Kim",
+            "role": "M.S. Student",
+            "email": "sprtms0814@gmail.com",
+            "photo": "upload/members/김규민.png"
         },
         {
             "name": "Jiseon Park",
             "role": "M.S. Student",
-            "email": "jinseon@gmail.com",
+            "email": " ",
             "photo": "upload/members/박지선.png"
-        }, 
+        },
         {
-            "name": "Seoyeong Mun",
+            "name": "Seong-Hun Lee",
             "role": "M.S. Student",
-            "email": "seyeong@gmail.com",
-            "photo": "upload/members/문서영.png"
-        }, 
+            "email": "ss2396ss@gmail.com",
+            "photo": "upload/members/이성훈.png"
+        },
         {
             "name": "Chaehyeon Kim",
             "role": "M.S. Student",
-            "email": "chaehyeon@gmail.com",
+            "email": "aulife4scarlette@gmail.com",
             "photo": "upload/members/김채현.png"
+        }, 
+        {
+            "name": "Seoyoung Moon",
+            "role": "M.S. Student",
+            "email": "moon84615@gmail.com",
+            "photo": "upload/members/문서영.png"
+        }, 
+        {
+            "name": "Yoonseok Ju",
+            "role": "M.S. Student",
+            "email": "jys090799@gmail.com",
+            "photo": "upload/members/주윤석.png"
+        },
+        {
+            "name": "Joonhyeok Oh",
+            "role": "M.S. Student",
+            "email": "wnsgur011717@gmail.com",
+            "photo": "upload/members/오준혁.png"
+        }, 
+        {
+            "name": "Jonathan",
+            "role": "M.S. Student",
+            "email": "alpaomegastartend@gmail.com",
+            "photo": "upload/members/조나단.png"
         }, 
         {
             "name": "Seongmin Kim",
             "role": "M.S. Student",
-            "email": "5888831@stu.kmu.ac.kr",
+            "email": "ksiemomnign@gmail.com",
             "photo": "upload/members/김성민.png"
         },
         {
-            "name": "Junhyeok Oh",
-            "role": "M.S. Student",
-            "email": "junhyeok@gmail.com",
-            "photo": "upload/members/오준혁.png"
-        }, 
-        {
-            "name": "Nadan Jo",
-            "role": "M.S. Student",
-            "email": "nadan@gmail.com",
-            "photo": "upload/members/조나단.png"
-        }, 
-        {
             "name": "Jun Jang",
             "role": "M.S. Student",
-            "email": "jun@gmail.com",
+            "email": "jj010822@gmail.com",
             "photo": "upload/members/장준.png"
         },  
         {
             "name": "Deokhyeon Kim",
             "role": "M.S. Student",
-            "email": "deokhyeon@gmail.com",
+            "email": "matho7830@gmail.com",
             "photo": "upload/members/김덕현.png"
-        }            
-
-        # ⬇️ 여기에 새 멤버 추가
+        },
+        {
+            "name": "Subin Yoon",
+            "role": "M.S. Student",
+            "email": "operativeyoon@gmail.com",
+            "photo": "upload/members/윤수빈.png"
+        }           
 
     ]
     return render_template('current.html', members=members, body_class='current-page')
@@ -311,8 +315,39 @@ class Conference(db.Model):
     
 @app.route('/conference')
 def conference():
-    all_conferences = Conference.query.order_by(Conference.year.desc()).all()
-    return render_template('conference.html', conferences=all_conferences)
+    selected_year = request.args.get('year', 'all')
+    page = request.args.get('page', 1, type=int)
+    per_page = 15
+    
+    all_conferences = Conference.query.all()
+    
+    MONTH_ORDER = {month: index for index, month in enumerate(month_name) if month}
+    sorted_conferences = sorted(
+        all_conferences,
+        key=lambda p: (
+            p.year,
+            MONTH_ORDER.get(p.month, 0) 
+        ),
+        reverse=True
+    )
+    
+    years = sorted(list({p.year for p in sorted_conferences}), reverse=True)
+    if selected_year != 'all':
+        sorted_conferences = [p for p in sorted_conferences if str(p.year) == selected_year]
+    
+    total = len(sorted_conferences)
+    start = (page - 1) * per_page
+    end = start + per_page
+    paginated_conferences = sorted_conferences[start:end]
+    
+    return render_template('conference.html',
+                            conferences=paginated_conferences,
+                            all_conferences=sorted_conferences if selected_year == 'all' else None,
+                            selected_year=selected_year,
+                            years=years,
+                            page=page,
+                            total=total,
+                            per_page=per_page)
 
 @app.route('/conference/create', methods=['GET', 'POST'])
 @login_required
@@ -320,12 +355,12 @@ def conference_create_post():
     if not getattr(current_user, 'is_admin', False):
         abort(403)
 
-    form = Paper()
+    form = Conference()
     if request.method == 'POST':
         new_conference = Conference(
             title=request.form.get('title'),
             author=request.form.get('author'),
-            journal=request.form.get('journal'),
+            conference=request.form.get('conference'),
             month=request.form.get('month'),
             year=request.form.get('year')
         )
@@ -333,6 +368,18 @@ def conference_create_post():
         db.session.commit()
         return redirect(url_for('conference'))
     return render_template('conference_create_post.html', form=form)
+
+@app.route('/conference/delete/<int:conference_id>', methods=['POST'])
+@login_required
+def conference_delete_post(conference_id):
+    if not getattr(current_user, 'is_admin', False):
+        abort(403)
+
+    conference = Conference.query.get_or_404(conference_id)
+    db.session.delete(conference)
+    db.session.commit()
+    flash('Paper deleted successfully.', 'success')
+    return redirect(url_for('conference', year=request.args.get('year', 'all')))
 ######################################################################
 
 
