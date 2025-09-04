@@ -145,7 +145,7 @@ def current():
         {
             "name": "Jiseon Park",
             "role": "M.S. Student",
-            "email": " ",
+            "email": "a01094670355@gmail.com",
             "photo": "upload/members/박지선.png"
         },
         {
