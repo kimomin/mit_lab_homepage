@@ -18,8 +18,8 @@ import secrets
 app = Flask(__name__)
 
 csrf = CSRFProtect(app)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev_secret_key')  ##
-app.config['WTF_CSRF_ENABLED'] = False ##
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')  
+app.config['WTF_CSRF_ENABLED'] = True 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
