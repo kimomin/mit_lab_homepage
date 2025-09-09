@@ -120,91 +120,91 @@ def current():
     members = [
         {
             "name": "Dong-Geun Lee",
-            "role": "B.S. Student",
+            "role": "M.S. Student",
             "email": "qqwwas1234@gmail.com",
             "photo": "upload/members/이동근.png"
         },
         {
             "name": "Jin-Ho Lee",
-            "role": "B.S. Student",
+            "role": "M.S. Student",
             "email": "jinho6606@naver.com",
             "photo": "upload/members/이진호.png"
         },
         {
             "name": "Min-Seo Song",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "minseo7250@gmail.com",
             "photo": "upload/members/송민서.png"
         },
         {
             "name": "Gyu-Min Kim",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "sprtms0814@gmail.com",
             "photo": "upload/members/김규민.png"
         },
         {
             "name": "Jiseon Park",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "a01094670355@gmail.com",
             "photo": "upload/members/박지선.png"
         },
         {
             "name": "Seong-Hun Lee",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "ss2396ss@gmail.com",
             "photo": "upload/members/이성훈.png"
         },
         {
             "name": "Chaehyeon Kim",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "aulife4scarlette@gmail.com",
             "photo": "upload/members/김채현.png"
         }, 
         {
             "name": "Seoyoung Moon",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "moon84615@gmail.com",
             "photo": "upload/members/문서영.png"
         }, 
         {
             "name": "Yoonseok Ju",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "jys090799@gmail.com",
             "photo": "upload/members/주윤석.png"
         },
         {
             "name": "Joonhyeok Oh",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "wnsgur011717@gmail.com",
             "photo": "upload/members/오준혁.png"
         }, 
         {
             "name": "Jonathan",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "alpaomegastartend@gmail.com",
             "photo": "upload/members/조나단.png"
         }, 
         {
             "name": "Seongmin Kim",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "ksiemomnign@gmail.com",
             "photo": "upload/members/김성민.png"
         },
         {
             "name": "Jun Jang",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "jj010822@gmail.com",
             "photo": "upload/members/장준.png"
         },  
         {
             "name": "Deokhyeon Kim",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "matho7830@gmail.com",
             "photo": "upload/members/김덕현.png"
         },
         {
             "name": "Subin Yoon",
-            "role": "M.S. Student",
+            "role": "Undergraduate Student",
             "email": "operativeyoon@gmail.com",
             "photo": "upload/members/윤수빈.png"
         }           
@@ -225,8 +225,8 @@ def contact():
 
 class Paper(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(300), nullable=False)
-    author = db.Column(db.String(200), nullable=False)
+    title = db.Column(db.String(500), nullable=False)
+    author = db.Column(db.String(500), nullable=False)
     journal = db.Column(db.String(200), nullable=False)
     month = db.Column(db.String(50))
     year = db.Column(db.Integer, nullable=False)
