@@ -17,7 +17,7 @@
       <div class="row post-row">
          {% for image in images %}
          <div class="image-wrapper col-12 d-flex justify-content-center mb-4">
-            <img src="{{ url_for('static', filename='upload/' + image.filename) }}" class="img-fluid mb-2">
+            <img src="{{ url_for('static', filename=image.filename) }}" class="img-fluid mb-2">
             <div class="card-body text-center">
                <p class="description-text">{{ image.description }}</p>
             </div>
