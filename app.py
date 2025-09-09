@@ -461,7 +461,7 @@ def gallery_create_post():
                 db.session.add(image)
                 db.session.flush()  # 이미지 ID 확보
                 if idx == thumbnail_index:
-                    post.thumbnail_id = image.id
+                    post.thumbnail = image
         db.session.commit()
         flash("Gallery post created.")
         return redirect(url_for('gallery'))
@@ -542,6 +542,7 @@ def gallery_edit_post(post_id):
                     post_id=post.id
                 )
                 db.session.add(image)
+                db.session.flush()
                 new_uploaded_images.append((f'new_{idx}', image))
         db.session.commit()
         

@@ -17,7 +17,7 @@
                 <div class="card h-100">
                     <a href="{{ url_for('gallery_view_post', post_id=post.id) }}" class="image-wrapper d-block position-relative">
                         {% if post.thumbnail %}
-                        <img src="{{ url_for('static', filename=post.thumbnail.filename) }}"
+                        <img src="{{ url_for('static', filename='upload/' + post.thumbnail.filename) }}"
                              class="card-img-top" alt="Thumbnail">
                         {% else %}
                         <img src="{{ url_for('static', filename='img/default_thumbnail.png') }}"
