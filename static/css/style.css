@@ -1856,7 +1856,7 @@ RESPONSIVE
     color: #d7edda;
 }
 
-@media (hover: none) and (pointer: coarse) and (max-width: 767px) {
+@media (hover: none) and (pointer: coarse) and (max-width: 600px){
 	.member-row {
 		display: flex;
 		flex-wrap: wrap; 
