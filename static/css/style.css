@@ -1942,6 +1942,7 @@ RESPONSIVE
 .paper-table {
 	border-collapse: collapse;
 	width: 100%;
+	margin-bottom: 20px;
 }
 
 .paper-table thead tr {
@@ -2081,6 +2082,7 @@ RESPONSIVE
 .conference-table {
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .conference-table thead tr {
@@ -2210,6 +2212,7 @@ RESPONSIVE
 .notice-table {
     border-collapse: collapse; /* 테이블의 기본 스타일 제거 */
     width: 100%;
+	margin-bottom: 20px;
 }
 
 .notice-table .title-col {width: 70%;}
