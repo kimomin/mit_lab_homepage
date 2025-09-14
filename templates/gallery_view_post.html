@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Gallery_View_Post{% endblock %}
 
 {% block content %}
    <div class="container-fluid mt-5 gallery-view-container">
@@ -17,7 +17,7 @@
       <div class="row post-row">
          {% for image in post.images %}
          <div class="image-wrapper col-12 d-flex justify-content-center mb-4">
-            <img src="{{ url_for('static', filename='upload/' + image.filename) }}" class="img-fluid mb-2">
+            <img src="{{ image.url }}" class="img-fluid mb-2">
             <div class="card-body text-center">
                <p class="description-text">{{ image.description }}</p>
             </div>

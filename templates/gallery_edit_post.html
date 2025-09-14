@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Edit Post{% endblock %}
+{% block title %}Gallery_Edit_Post{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
     <h2 class="mb-4">Edit Gallery Post</h2>
 
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="form-group">
             <label for="title">Post Title</label>
@@ -24,7 +24,7 @@
         <div class="row post-row">
             {% for image in post.images %}
             <div class="image-wrapper col-12 d-flex justify-content-center mb-4" id="image-card-{{ image.id }}">
-                <img src="{{ url_for('static', filename='upload/' + image.filename) }}" class="img-fluid mb-2">
+                <img src="{{ image.url }}" class="img-fluid mb-2">
                 <div class="card-body text-center">
                     <!-- hidden 필드로 이미지 ID 전달 -->
                     <input type="hidden" name="image_ids" value="{{ image.id }}">
@@ -51,7 +51,7 @@
         <h4 class="mb-3">Add New Images</h4>
         <div id="image-upload-section">
             <div class="image-block mb-3">
-                <input type="file" name="images[]" class="form-control mb-2">
+                <input type="url" name="images[]" class="form-control mb-2" placeholder="Enter Cloudinary URL">
                 <input type="text" name="descriptions[]" class="form-control mb-2" placeholder="Image description">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="thumbnail_index" value="new_0">
@@ -73,7 +73,7 @@ document.getElementById('add-image').addEventListener('click', function() {
     const block = document.createElement('div');
     block.classList.add('image-block', 'mb-3');
     block.innerHTML = `
-        <input type="file" name="images[]" class="form-control mb-2">
+        <input type="url" name="images[]" class="form-control mb-2" placeholder="Enter Cloudinary URL">
         <input type="text" name="descriptions[]" class="form-control mb-2" placeholder="Image description">
         <div class="form-check">
             <input class="form-check-input" type="radio" name="thumbnail_index" value="new_${imageIndex}">

@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}New Gallery Post{% endblock %}
+{% block title %}Gallery_Create_Post{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
     <h2 class="mb-4">Create New Gallery Post</h2>
 
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="form-group">
             <label for="title">Post Title</label>
@@ -19,9 +19,9 @@
         </div>
 
         <div id="image-upload-section">
-            <label>Upload Images</label>
+            <label>Image URLs</label>
             <div class="image-block mb-3">
-                <input type="file" name="images[]" class="form-control mb-2" required>
+                <input type="url" name="images[]" class="form-control mb-2" placeholder="Enter Cloudinary URL" required>
                 <input type="text" name="descriptions[]" class="form-control mb-2" placeholder="Image description">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="thumbnail_index" value="0" checked>
@@ -44,7 +44,7 @@ document.getElementById('add-image').addEventListener('click', function() {
     const block = document.createElement('div');
     block.classList.add('image-block', 'mb-3');
     block.innerHTML = `
-        <input type="file" name="images[]" class="form-control mb-2" required>
+        <input type="url" name="images[]" class="form-control mb-2" placeholder="Enter Cloudinary URL" required>
         <input type="text" name="descriptions[]" class="form-control mb-2" placeholder="Image description">
         <div class="form-check">
             <input class="form-check-input" type="radio" name="thumbnail_index" value="${imageIndex}">

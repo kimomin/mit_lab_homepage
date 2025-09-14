@@ -12,7 +12,11 @@ from PIL import Image
 from werkzeug.utils import secure_filename
 import os, io, uuid
 import shutil
+import uuid
 import secrets
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 app = Flask(__name__)
@@ -23,6 +27,12 @@ app.config['WTF_CSRF_ENABLED'] = True
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+cloudinary.config(
+  cloud_name = os.environ.get("CLOUDINARY_CLOUD_NAME"),
+  api_key = os.environ.get("CLOUDINARY_API_KEY"),
+  api_secret = os.environ.get("CLOUDINARY_API_SECRET")
+)
 
 app.config['MAX_CONTENT_LENGTH'] = 64*1024*1024
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'pdf'}
@@ -38,6 +48,20 @@ def random_name(original: str) -> str:
     safe = secure_filename(original)
     stem, ext = os.path.splitext(safe)
     return f"{uuid.uuid4().hex}{ext.lower()}"
+
+def upload_to_cloudinary(file_storage, folder="gallery"):
+    if not allowed_file(file_storage.filename):
+        raise ValueError("Disallowed file type")
+
+    ext = file_storage.filename.rsplit('.', 1)[-1].lower() #디버깅용
+
+    result = cloudinary.uploader.upload(
+        file_storage,
+        folder=folder,
+        resource_type="auto",  
+        public_id=str(uuid.uuid4())  
+    )
+    return result["secure_url"], result["public_id"]
 
 def save_file(file_storage, subdir) -> str:
     """
@@ -403,7 +427,8 @@ class GalleryPost(db.Model):
 
 class GalleryImage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String(100), nullable=False)
+    filename = db.Column(db.String(500), nullable=False)
+    public_id = db.Column(db.String(500), nullable=False)
     description = db.Column(db.String(255))
     uploaded_at = db.Column(db.DateTime, default=datetime.utcnow)
     post_id = db.Column(db.Integer, db.ForeignKey('gallery_post.id'), nullable=True)
@@ -411,11 +436,6 @@ class GalleryImage(db.Model):
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def get_post_upload_folder(post_id):
-    post_folder = os.path.join(BASE_UPLOAD_FOLDER, f'post_{post_id}')
-    os.makedirs(post_folder, exist_ok=True)
-    return post_folder
     
 ## 갤러리 라우트
 @app.route('/gallery')
@@ -451,15 +471,16 @@ def gallery_create_post():
 
         for idx, file in enumerate(files):
             if file and allowed_file(file.filename):
-                rel_path = save_file(file, subdir=f'images/post_{post.id}')
+                url, public_id = upload_to_cloudinary(file, folder=f"gallery/post_{post.id}")
                                  
                 image = GalleryImage(
-                    filename=rel_path,
+                    filename=url,
+                    public_id=public_id,
                     description=descriptions[idx] if idx < len(descriptions) else '',
                     post_id=post.id
                     )
                 db.session.add(image)
-                db.session.flush()  # 이미지 ID 확보
+                db.session.flush()  
                 if idx == thumbnail_index:
                     post.thumbnail = image
         db.session.commit()
@@ -477,20 +498,15 @@ def delete_post(post_id):
     if not getattr(current_user, 'is_admin', False):
         abort(403)
 
-
     # 포함된 이미지 모두 가져오기
     images = post.images
 
     # 이미지 파일 삭제
     for image in images:
-        image_path = os.path.join(app.root_path, 'static', 'upload', image.filename)
-        if os.path.exists(image_path):
-            os.remove(image_path)
-
-    # 게시물 폴더 삭제
-    post_folder = get_post_upload_folder(post_id)
-    if os.path.exists(post_folder):
-        shutil.rmtree(post_folder)
+        try:
+            cloudinary.uploader.destroy(image.public_id)
+        except Exception as e:
+            print(f"Cloudinary delete error: {e}")
 
     # DB에서 이미지 → 게시물 순서로 삭제
     for image in images:
@@ -534,10 +550,11 @@ def gallery_edit_post(post_id):
         
         for idx, file in enumerate(files):
             if file and allowed_file(file.filename):
-                rel_path = save_file(file, subdir=f'images/post_{post.id}')
+                url, public_id = upload_to_cloudinary(file, folder=f"gallery/post_{post.id}")
 
                 image = GalleryImage(
-                    filename=rel_path,
+                    filename=url,
+                    public_id=public_id,
                     description=descriptions[idx] if idx < len(descriptions) else '',
                     post_id=post.id
                 )
@@ -576,11 +593,10 @@ def delete_image_from_post(post_id, image_id):
     if not getattr(current_user, 'is_admin', False):
         abort(403)
     
-    # 파일 삭제
-    post_folder = get_post_upload_folder(post_id)
-    filepath = os.path.join(post_folder, os.path.basename(image.filename))
-    if os.path.exists(filepath):
-        os.remove(filepath)
+    try:
+        cloudinary.uploader.destroy(image.public_id)
+    except Exception as e:
+        print(f"Cloudinary delete error: {e}")
 
     # DB 삭제
     db.session.delete(image)
@@ -746,8 +762,8 @@ login_manager.login_view = 'login'
 ## 사용자 모델 정의하기
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(128), nullable=False)
+    username = db.Column(db.String(500), unique=True, nullable=False)
+    password = db.Column(db.String(500), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     
     def __repr__(self):
