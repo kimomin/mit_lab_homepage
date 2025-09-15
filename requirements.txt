@@ -55,5 +55,7 @@ Pillow==11.3.0
 SQLAlchemy==2.0.30
 gunicorn==23.0.0
 psycopg2-binary>=2.9,<3
+cloudinary==1.44.1
+uuid==1.30
 
 # scikit-image                      ==0.23.2
