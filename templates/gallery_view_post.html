@@ -17,7 +17,7 @@
       <div class="row post-row">
          {% for image in post.images %}
          <div class="image-wrapper col-12 d-flex justify-content-center mb-4">
-            <img src="{{ image.url }}" class="img-fluid mb-2">
+            <img src="{{ image.filename }}" class="img-fluid mb-2">
             <div class="card-body text-center">
                <p class="description-text">{{ image.description }}</p>
             </div>

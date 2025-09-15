@@ -24,7 +24,7 @@
         <div class="row post-row">
             {% for image in post.images %}
             <div class="image-wrapper col-12 d-flex justify-content-center mb-4" id="image-card-{{ image.id }}">
-                <img src="{{ image.url }}" class="img-fluid mb-2">
+                <img src="{{ image.filename }}" class="img-fluid mb-2">
                 <div class="card-body text-center">
                     <!-- hidden 필드로 이미지 ID 전달 -->
                     <input type="hidden" name="image_ids" value="{{ image.id }}">
