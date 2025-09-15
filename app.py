@@ -428,7 +428,7 @@ class GalleryPost(db.Model):
 class GalleryImage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(500), nullable=False)
-    public_id = db.Column(db.String(500), nullable=False)
+    public_id = db.Column(db.String(500), nullable=True)
     description = db.Column(db.String(255))
     uploaded_at = db.Column(db.DateTime, default=datetime.utcnow)
     post_id = db.Column(db.Integer, db.ForeignKey('gallery_post.id'), nullable=True)
@@ -461,7 +461,7 @@ def gallery_create_post():
         date_str = request.form.get('date')  
         date = datetime.strptime(date_str, "%Y-%m-%d") 
         
-        files = request.files.getlist('images[]')
+        urls = request.form.getlist('images[]')
         descriptions = request.form.getlist('descriptions[]')
         thumbnail_index = int(request.form.get('thumbnail_index', 0))
 
@@ -469,13 +469,11 @@ def gallery_create_post():
         db.session.add(post)
         db.session.commit()  # post.id 필요하므로 먼저 커밋
 
-        for idx, file in enumerate(files):
-            if file and allowed_file(file.filename):
-                url, public_id = upload_to_cloudinary(file, folder=f"gallery/post_{post.id}")
+        for idx, url in enumerate(urls):
                                  
                 image = GalleryImage(
                     filename=url,
-                    public_id=public_id,
+                    public_id=None,
                     description=descriptions[idx] if idx < len(descriptions) else '',
                     post_id=post.id
                     )
@@ -500,13 +498,6 @@ def delete_post(post_id):
 
     # 포함된 이미지 모두 가져오기
     images = post.images
-
-    # 이미지 파일 삭제
-    for image in images:
-        try:
-            cloudinary.uploader.destroy(image.public_id)
-        except Exception as e:
-            print(f"Cloudinary delete error: {e}")
 
     # DB에서 이미지 → 게시물 순서로 삭제
     for image in images:
@@ -542,19 +533,17 @@ def gallery_edit_post(post_id):
             
         db.session.commit()
 
-        files = request.files.getlist('images[]')
+        urls = request.form.getlist('images[]')
         descriptions = request.form.getlist('descriptions[]')
         thumbnail_index = request.form.get('thumbnail_index')
         
         new_uploaded_images = []
         
-        for idx, file in enumerate(files):
-            if file and allowed_file(file.filename):
-                url, public_id = upload_to_cloudinary(file, folder=f"gallery/post_{post.id}")
-
+        for idx, url in enumerate(urls):
+            if url.strip():
                 image = GalleryImage(
                     filename=url,
-                    public_id=public_id,
+                    public_id=None,
                     description=descriptions[idx] if idx < len(descriptions) else '',
                     post_id=post.id
                 )
@@ -592,11 +581,6 @@ def delete_image_from_post(post_id, image_id):
     
     if not getattr(current_user, 'is_admin', False):
         abort(403)
-    
-    try:
-        cloudinary.uploader.destroy(image.public_id)
-    except Exception as e:
-        print(f"Cloudinary delete error: {e}")
 
     # DB 삭제
     db.session.delete(image)
