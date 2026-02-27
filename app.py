@@ -754,7 +754,7 @@ class User(UserMixin, db.Model):
         return '<User {self.username}>'
     
 with app.app_context():
-    db.create_all
+    db.create_all()
     
 
 ## 사용자 로더 함수 정의하기
