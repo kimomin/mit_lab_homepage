@@ -25,7 +25,7 @@ csrf = CSRFProtect(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')  
 app.config['WTF_CSRF_ENABLED'] = True 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///database.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 cloudinary.config(
@@ -753,8 +753,8 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {self.username}>'
     
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
     
 
 ## 사용자 로더 함수 정의하기
@@ -812,8 +812,8 @@ def logout():
 ######################################################################
 
 
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+# if __name__ == '__main__':
+#     with app.app_context():
+#         db.create_all()
+#     port = int(os.environ.get("PORT", 5000))
+#     app.run(host="0.0.0.0", port=port)
